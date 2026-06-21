@@ -1,0 +1,25 @@
+[*] Logging in users and managers...
+
+=== TEST 1: Dynamic Timezone & Slot Calculation ===
+[+] Successfully fetched 28 available slots.
+[+] Slot timezone conversion check PASSED: Local 09:00 converted to UTC 06:00 (2026-06-22T06:00:00Z).
+[+] Lunch break filtering check PASSED: No slots generated during lunch hours (09:00-10:00 UTC).
+
+=== TEST 2: JWT Security & Multi-Tenant ID Tampering ===
+[+] ID Tampering prevention PASSED: Manager belonging to Branch 1 was BLOCKED (403 Forbidden) from accessing Branch 2.
+[*] Querying security logs as Admin...
+[+] Security Auditing PASSED: Found log record: 'User attempted to access branch 2 but is assigned to branch 1. Path: /api/branch/2/appointments'
+
+=== TEST 3: Concurrency Race Condition Prevention (50 Requests) ===
+[*] Booking Concurrency Results Summary:
+    - Successful Bookings (HTTP 201): 1
+    - Blocked Overlaps (HTTP 422 Conflict): 49
+    - Other responses: 0
+[+] Concurrency booking check PASSED: Exactly 1 reservation succeeded, and 49 were blocked (Race Condition successfully resolved).
+
+=== VERIFICATION RESULTS SUMMARY ===
+Test 1 - Dynamic Slots:    PASSED
+Test 2 - JWT & RBAC Log:   PASSED
+Test 3 - Race Condition:   PASSED
+
+[+] ALL TESTS COMPLETED SUCCESSFULLY! SYSTEM ARCHITECTURE IS ROBUST.
